@@ -1,7 +1,7 @@
 .main-footer {
     position: fixed;
-    bottom: 0;
-    width: 100%;
+    bottom:0px;
+    width:100%;
 }
 
 button {
@@ -11,4 +11,3 @@ button {
 .table-actions {
     width: 150px;
 }
-

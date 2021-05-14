@@ -31,13 +31,8 @@ function submit(values, method) {
     const id = values._id ? values._id : "";
     axios[method](`${BASE_URL}/billingCycles/${id}`, values)
       .then((resp) => {
-        toastr.success("Sucesso", "Operação realizada com sucesso.");
-        dispatch([
-          resetForm("billingCycleForm"),
-          getList(),
-          selectTab("tabList"),
-          showTabs("tabList", "tabCreate"),
-        ]);
+        toastr.success("Sucesso", "Operação Realizada com sucesso.");
+        dispatch(init());
       })
       .catch((e) => {
         e.response.data.errors.forEach((error) => toastr.error("Erro", error));

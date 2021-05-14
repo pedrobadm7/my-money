@@ -12,15 +12,14 @@ class BillingCycleForm extends Component {
   calculateSummary() {
     const sum = (t, v) => t + v;
     return {
-      sumOfCredits: this.props.credits.map((c) => c.value || 0).reduce(sum),
-      sumOfDebts: this.props.debts.map((d) => d.value || 0).reduce(sum),
+      sumOfCredits: this.props.credits.map((c) => +c.value || 0).reduce(sum),
+      sumOfDebts: this.props.debts.map((d) => +d.value || 0).reduce(sum),
     };
   }
 
   render() {
     const { handleSubmit, readOnly, credits, debts } = this.props;
     const { sumOfCredits, sumOfDebts } = this.calculateSummary();
-
     return (
       <form role="form" onSubmit={handleSubmit}>
         <div className="box-body">
@@ -35,17 +34,17 @@ class BillingCycleForm extends Component {
           <Field
             name="month"
             component={LabelAndInput}
-            readOnly={readOnly}
             type="number"
+            readOnly={readOnly}
             label="Mês"
             cols="12 4"
-            placeholder="Infome o mês"
+            placeholder="Informe o mês"
           />
           <Field
             name="year"
             component={LabelAndInput}
-            readOnly={readOnly}
             type="number"
+            readOnly={readOnly}
             label="Ano"
             cols="12 4"
             placeholder="Informe o ano"
@@ -54,15 +53,15 @@ class BillingCycleForm extends Component {
           <ItemList
             cols="12 6"
             list={credits}
-            field="credits"
             readOnly={readOnly}
+            field="credits"
             legend="Créditos"
           />
           <ItemList
             cols="12 6"
             list={debts}
-            field="debts"
             readOnly={readOnly}
+            field="debts"
             legend="Débitos"
             showStatus={true}
           />
@@ -88,7 +87,6 @@ BillingCycleForm = reduxForm({
   form: "billingCycleForm",
   destroyOnUnmount: false,
 })(BillingCycleForm);
-
 const selector = formValueSelector("billingCycleForm");
 const mapStateToProps = (state) => ({
   credits: selector(state, "credits"),
